@@ -3,7 +3,7 @@ package com.hhplus.hhplus2week.user;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "USER")
+@Table(name = "TB_USER")
 public class User {
 
     @Id
