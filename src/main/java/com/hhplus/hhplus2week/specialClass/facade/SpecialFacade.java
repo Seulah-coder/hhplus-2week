@@ -9,10 +9,8 @@ import com.hhplus.hhplus2week.specialClass.domain.entity.SpecialClass;
 import com.hhplus.hhplus2week.specialClass.domain.entity.SpecialClassInventory;
 import com.hhplus.hhplus2week.specialClass.domain.entity.SpecialClassItem;
 import com.hhplus.hhplus2week.specialClass.domain.entity.SpecialEnrolment;
-import com.hhplus.hhplus2week.user.domain.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;

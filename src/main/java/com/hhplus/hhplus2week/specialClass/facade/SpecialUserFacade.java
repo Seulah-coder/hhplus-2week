@@ -1,6 +1,5 @@
 package com.hhplus.hhplus2week.specialClass.facade;
 
-import com.hhplus.hhplus2week.specialClass.application.SpecialClassInventoryService;
 import com.hhplus.hhplus2week.specialClass.application.SpecialEnrolmentService;
 import com.hhplus.hhplus2week.specialClass.domain.entity.SpecialEnrolment;
 import com.hhplus.hhplus2week.user.application.UserService;
@@ -45,8 +44,8 @@ public class SpecialUserFacade {
 
     /**
      * 유저 아이디로 신청한 강의를 조회한다
-     * @param userId
-     * @return
+     * @param userId 유저아이디
+     * @return 신청한 객체
      */
     public List<SpecialEnrolment> getSpecialEnrolments(long userId){
         return specialEnrolmentService.getSpecialEnrolments(userId);
