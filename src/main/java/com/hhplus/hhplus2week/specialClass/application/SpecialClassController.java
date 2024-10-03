@@ -58,7 +58,7 @@ public class SpecialClassController {
     }
 
     /**
-     * 특강 신청
+     * API Specs 특강 신청
      * @param userId
      * @param itemId
      * @return
@@ -68,4 +68,5 @@ public class SpecialClassController {
         SpecialEnrolment enrolment = specialFacade.saveUserSpecialClassEnrolment(userId, itemId);
         return ResponseEntity.ok(enrolment);
     };
+
 }
