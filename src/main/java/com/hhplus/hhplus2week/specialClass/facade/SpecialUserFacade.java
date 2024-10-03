@@ -9,6 +9,8 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+
 @Component
 public class SpecialUserFacade {
 
@@ -41,7 +43,12 @@ public class SpecialUserFacade {
         }
     }
 
-    public SpecialEnrolment getSpecialEnrolment(long userId){
-        return specialEnrolmentService.getSpecialEnrolment(userId);
+    /**
+     * 유저 아이디로 신청한 강의를 조회한다
+     * @param userId
+     * @return
+     */
+    public List<SpecialEnrolment> getSpecialEnrolments(long userId){
+        return specialEnrolmentService.getSpecialEnrolments(userId);
     }
 }

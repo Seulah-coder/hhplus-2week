@@ -6,6 +6,8 @@ import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class SpecialEnrolmentService {
 
@@ -22,7 +24,12 @@ public class SpecialEnrolmentService {
         return specialEnrolment;
     }
 
-    public SpecialEnrolment getSpecialEnrolment(long userId) {
-        return specialEnrolmentRepository.findByUserId(userId);
+    /**
+     * 유저 아이디로 강의 신청한 내역을 조회한다.
+     * @param userId
+     * @return
+     */
+    public List<SpecialEnrolment> getSpecialEnrolments(long userId){
+        return specialEnrolmentRepository.findSpecialEnrolmentsByUserId(userId);
     }
 }

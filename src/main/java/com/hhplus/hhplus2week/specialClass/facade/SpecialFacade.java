@@ -15,6 +15,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Component
@@ -35,14 +36,15 @@ public class SpecialFacade {
      * 초기 강의 등록 설정
      * @param name
      * @param teacher
-     * @param date
      * @param openDate
      * @return
      */
-    public SpecialClassInventory saveInitAllSpecialClass(String name, String teacher ,LocalDateTime date, LocalDateTime openDate) {
+    public SpecialClassInventory saveInitAllSpecialClass(String name, String teacher ,String openDate) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        LocalDateTime localDateTime = LocalDateTime.parse(openDate, formatter);
         long totalHeadcount = 30L;
         SpecialClass specialClass = specialClassService.saveSpecialClass(name, teacher);
-        SpecialClassItem specialClassItem = specialClassItemService.saveSpecialClassItem(specialClass.getId(), date, totalHeadcount);
+        SpecialClassItem specialClassItem = specialClassItemService.saveSpecialClassItem(specialClass.getId(), localDateTime, totalHeadcount);
         SpecialClassInventory specialClassInventory = specialClassInventoryService.saveSpecialClassInventory(specialClass.getId(), specialClassItem.getId(), 0);;
         return specialClassInventory;
     }

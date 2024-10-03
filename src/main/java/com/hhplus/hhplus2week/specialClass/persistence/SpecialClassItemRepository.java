@@ -15,4 +15,6 @@ public interface SpecialClassItemRepository extends JpaRepository<SpecialClassIt
 
     @Query("SELECT i FROM SpecialClassItem i WHERE i.openDate > :date")
     List<SpecialClassItem> findSpecialItemsAfterTheDate(@Param("date") LocalDateTime date);
+
+    List<SpecialClassItem> findSpecialClassItemByUserId(@Param("userId") Long userId);
 }
