@@ -24,22 +24,22 @@ class SpecialClassServiceTest {
     @MockBean
     SpecialClassRepository specialClassRepository;
 
+
     @Test
     void saveSpecialClass() {
 
+        //given
         String name = "test";
-        long headCount = 20L;
         String teacher = "test teacher";
         SpecialClass specialClass = new SpecialClass();
         specialClass.setName(name);
         specialClass.setTeacher(teacher);
 
-
+        //when
         when(specialClassRepository.save(any(SpecialClass.class))).thenReturn(specialClass);
-        // Act
         SpecialClass result = specialClassService.saveSpecialClass(name, teacher);
 
-        // Assert
+        //then
         assertNotNull(result);
         assertEquals(1L, result.getId());
         assertEquals("test teacher", result.getName());
@@ -47,16 +47,34 @@ class SpecialClassServiceTest {
 
     @Test
     void updateSpecialClass() {
+
+        //given
+        Long specialClassId = 1L;
+        SpecialClass specialClass = specialClassService.getSpecialClass(specialClassId);
+        specialClass.setName("이름 바꿈");
+        specialClass.setTeacher("선생님도 이름 바꿈");
+
+        //when
+        when(specialClassRepository.save(any(SpecialClass.class))).thenReturn(specialClass);
+        SpecialClass result = specialClassService.updateSpecialClass(specialClass);
+
+        //then
+        assertNotNull(result);
+        assertEquals(1L, result.getId());
+        assertEquals("이름 바꿈", result.getName());
+        assertEquals("선생님도 이름 바꿈", result.getTeacher());
     }
 
     @Test
     void getSpecialClass() {
+
+        //given
         long classId = 1L;
-        specialClassService.getSpecialClass(classId);
+        //when
+        SpecialClass specialClass = specialClassService.getSpecialClass(classId);
+        //then
+        assertEquals(classId, specialClass.getId());
+
     }
 
-    @Test
-    void getSpecialClasses() {
-
-    }
 }

@@ -48,15 +48,4 @@ class UserServiceTest {
 
     }
 
-    @Test
-    void updateUser() {
-    }
-
-    @Test
-    void getUser() {
-    }
-
-    @Test
-    void getUsers() {
-    }
 }
