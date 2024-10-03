@@ -10,6 +10,7 @@ import com.hhplus.hhplus2week.specialClass.facade.SpecialFacade;
 import com.hhplus.hhplus2week.specialClass.facade.SpecialUserFacade;
 import com.hhplus.hhplus2week.user.application.UserService;
 import com.hhplus.hhplus2week.user.domain.entity.User;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -26,6 +27,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 @SpringBootTest
 @ExtendWith(MockitoExtension.class)
+@DisplayName("통합테스트")
 class IntegrationTest {
 
     @Autowired
