@@ -1,16 +1,15 @@
 package com.hhplus.hhplus2week.specialClass.application;
 
+import com.hhplus.hhplus2week.specialClass.HeadcountExceededException;
 import com.hhplus.hhplus2week.specialClass.domain.entity.SpecialClassInventory;
 import com.hhplus.hhplus2week.specialClass.domain.entity.SpecialClassItem;
 import com.hhplus.hhplus2week.specialClass.persistence.SpecialClassInventoryRepository;
-import com.hhplus.hhplus2week.specialClass.persistence.SpecialClassRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.concurrent.RejectedExecutionException;
 
 @Service
 public class SpecialClassInventoryService {
@@ -19,16 +18,13 @@ public class SpecialClassInventoryService {
 
     @Autowired
     SpecialClassItemService specialClassItemService;
-    @Autowired
-    private SpecialClassRepository specialClassRepository;
 
     @Transactional
-    public SpecialClassInventory saveSpecialClassInventory(long itemId, long classId, long headcount, LocalDateTime date){
+    public SpecialClassInventory saveSpecialClassInventory(long itemId, long classId, long currentHeadCount){
         SpecialClassInventory specialClassInventory = new SpecialClassInventory();
         specialClassInventory.setSpecialClassItemId(itemId);
         specialClassInventory.setClassId(classId);
-        specialClassInventory.setCurrentHeadcount(headcount);
-        specialClassInventory.setOpenDate(date);
+        specialClassInventory.setCurrentHeadcount(currentHeadCount);
         specialClassInventory = specialClassInventoryRepository.save(specialClassInventory);
         return specialClassInventory;
     }
@@ -38,10 +34,9 @@ public class SpecialClassInventoryService {
         SpecialClassInventory findSpecialClassInventory = this.getSpecialClassInventory(specialClassInventory.getId());
 
         SpecialClassItem specialClassItem = specialClassItemService.getSpecialClassItem(findSpecialClassInventory.getClassId());
-        if(specialClassItem.getTotalHeadcount() < findSpecialClassInventory.getCurrentHeadcount()){
-            throw new RejectedExecutionException("전체 정원 오버");
+        if(specialClassItem.getTotalHeadcount() <= findSpecialClassInventory.getCurrentHeadcount()){
+            throw new HeadcountExceededException("전체 정원 오버");
         }
-        findSpecialClassInventory.setOpenDate(specialClassInventory.getOpenDate());
         findSpecialClassInventory.setCurrentHeadcount(specialClassInventory.getCurrentHeadcount());
         findSpecialClassInventory.setClassId(specialClassInventory.getClassId());
         findSpecialClassInventory.setSpecialClassItemId(specialClassInventory.getSpecialClassItemId());
@@ -56,7 +51,7 @@ public class SpecialClassInventoryService {
         return specialClassInventoryRepository.findAllByClassId(classId);
     }
 
-    public List<SpecialClassInventory> getSpecialClassInventoriesByItemId(long itemId){
-        return specialClassInventoryRepository.findAllBySpecialClassItemId(itemId);
+    public SpecialClassInventory getSpecialClassInventoryByItemId(long itemId){
+        return specialClassInventoryRepository.findBySpecialClassItemId(itemId);
     }
 }

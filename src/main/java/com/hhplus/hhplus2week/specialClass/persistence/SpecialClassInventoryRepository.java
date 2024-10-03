@@ -11,4 +11,6 @@ public interface SpecialClassInventoryRepository extends JpaRepository<SpecialCl
     List<SpecialClassInventory> findAllByClassId(long classId);
 
     List<SpecialClassInventory> findAllBySpecialClassItemId(long itemId);
+
+    SpecialClassInventory findBySpecialClassItemId(long itemId);
 }

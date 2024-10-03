@@ -26,9 +26,6 @@ public class SpecialClassInventory {
     @Column(name ="ITEM_ID")
     private long specialClassItemId;
 
-    @Column(name = "OPEN_DATE")
-    private LocalDateTime openDate;
-
     @Column(name ="CURRENT_HEADCOUNT")
     private long currentHeadcount;
 }
