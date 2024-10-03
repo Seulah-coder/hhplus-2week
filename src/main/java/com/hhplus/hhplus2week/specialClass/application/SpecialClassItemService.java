@@ -2,8 +2,11 @@ package com.hhplus.hhplus2week.specialClass.application;
 
 import com.hhplus.hhplus2week.specialClass.domain.entity.SpecialClassItem;
 import com.hhplus.hhplus2week.specialClass.persistence.SpecialClassItemRepository;
+import jakarta.persistence.LockModeType;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Lock;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -39,6 +42,7 @@ public class SpecialClassItemService {
         return findSpecialClassItem;
     }
 
+    @Lock(LockModeType.PESSIMISTIC_WRITE)
     public SpecialClassItem getSpecialClassItem(long itemId){
         return specialClassItemRepository.findById(itemId).orElseThrow(() -> new IllegalArgumentException("강의 아이디 없음"));
     }
@@ -50,4 +54,11 @@ public class SpecialClassItemService {
     public List<SpecialClassItem> getSpecialClassItems(long classId){
         return specialClassItemRepository.findAllByClassId(classId);
     }
+
+    public List<SpecialClassItem> getSpecialClassItemsAfterNow(){
+        LocalDateTime date = LocalDateTime.now();
+        return specialClassItemRepository.findSpecialItemsAfterTheDate(date);
+    }
+
+
 }
