@@ -8,6 +8,6 @@ SpecialClassInventory: 강의에 대한 정보와 하위 정보를 가져오기 
 
 SpecialEnrolment : 유저가 강의를 신청한 정보
 
-User : 유저 정보
+User : 유저 정보를 담은 테이블
 
 <img width="886" alt="Screenshot 2024-10-03 at 11 31 11 PM" src="https://github.com/user-attachments/assets/d030bfb5-d239-4021-afd0-7fb54147d017">
