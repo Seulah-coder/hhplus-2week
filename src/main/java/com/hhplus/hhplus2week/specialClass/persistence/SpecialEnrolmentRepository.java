@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface SpecialEnrolmentRepository extends JpaRepository<SpecialEnrolment, Long> {
+    SpecialEnrolment findByUserId(long userId);
 }
