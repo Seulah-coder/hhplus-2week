@@ -4,8 +4,6 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.sql.Timestamp;
-
 @Entity
 @Table(name = "TB_SPECIAL_ENROLMENT")
 @Getter
@@ -20,8 +18,8 @@ public class SpecialEnrolment {
     @Column(name = "CLASS_ITEM_ID")
     private long classItemId;
 
-    @Column(name = "USED_ID")
-    private long usedId;
+    @Column(name = "USER_ID")
+    private long userId;
 
     @Column(name ="ENROL_TIME")
     private long enrolTime;
