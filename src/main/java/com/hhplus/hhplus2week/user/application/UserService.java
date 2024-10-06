@@ -2,7 +2,6 @@ package com.hhplus.hhplus2week.user.application;
 
 import com.hhplus.hhplus2week.user.persistence.UserRepository;
 import com.hhplus.hhplus2week.user.domain.entity.User;
-import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,16 +13,21 @@ public class UserService {
     @Autowired
     UserRepository userRepository;
 
-    @Transactional
-    public User saveUser(String name, String mobile){
+    public User createUser(String name, String mobile){
+
+        if (userRepository.findByMobile(mobile).isPresent()) {
+            throw new RuntimeException("이미 가입된 사용자 입니다.");
+        }
+
         User user = new User();
         user.setName(name);
         user.setMobile(mobile);
-        userRepository.save(user);
+
+        user = userRepository.save(user);
+
         return user;
     }
 
-    @Transactional
     public User updateUser(User user){
         User findUser = this.getUser(user.getId());
         findUser.setMobile(user.getMobile());

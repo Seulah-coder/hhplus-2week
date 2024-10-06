@@ -9,7 +9,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
@@ -22,13 +21,14 @@ class UserServiceTest {
     @InjectMocks
     UserService userService;
 
-    @MockBean
+    @Mock
     UserRepository userRepository;
+
 
     @Test
     void saveUser() {
 
-
+        //given
         String userName = "testUser";
         String mobile = "12345678";
 
@@ -39,7 +39,7 @@ class UserServiceTest {
 
         when(userRepository.save(any(User.class))).thenReturn(user);
         // Act
-        User result = userService.saveUser(userName, mobile);
+        User result = userService.createUser(userName, mobile);
 
         // Assert
         assertNotNull(result);
